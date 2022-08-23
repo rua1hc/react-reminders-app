@@ -1,19 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 
-export default function NewReminder() {
+interface NewReminderProps {
+    onAddReminder: (title: string) => void;
+}
+
+export default function NewReminder({
+    onAddReminder,
+}: NewReminderProps): JSX.Element {
+    const [title, setTitle] = useState("");
+
+    const submitFrom = async (e: React.FormEvent) => {
+        e.preventDefault();
+        // console.log(title);
+
+        if (!title) return;
+        onAddReminder(title);
+        setTitle("");
+    };
+
     return (
-        <div className="input-group mb-2">
+        <form className="input-group mb-2" onSubmit={submitFrom}>
             <input
                 type="text"
                 className="form-control"
-                placeholder="Recipient's username"
+                placeholder="New title here..."
+                onChange={(e) => setTitle(e.target.value)}
+                value={title}
             />
             <button
                 className="btn btn-outline-primary rounded-pill ms-3 me-2 px-4"
-                type="button"
+                type="submit"
             >
                 Add
             </button>
-        </div>
+        </form>
     );
 }

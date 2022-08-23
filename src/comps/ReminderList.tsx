@@ -15,10 +15,10 @@ export default function ReminderList({
             <ul className="list-group ">
                 {items.map((item) => (
                     <li
-                        className="list-group-item d-flex justify-content-between"
+                        className="list-group-item d-flex justify-content-between "
                         key={item.id}
                     >
-                        {item.title}
+                        <span>{item.title}</span>
                         <button
                             className="btn btn-small btn-outline-danger rounded-pill "
                             onClick={() => onDeleteReminder(item.id)}
